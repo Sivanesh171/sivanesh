@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Intake Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #a2d4ec, #ffffff);
+      color: #333;
+    }
+
+    header {
+      background-color: #347bcd;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    main {
+      max-width: 500px;
+      background: white;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 2rem;
+      padding: 0.9rem;
+      width: 100%;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #16c5c5;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    .result {
+      margin-top: 2rem;
+      background: #dff9fb;
+      padding: 1.5rem;
+      border-radius: 15px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      padding: 1rem;
+      background-color: #f1f1f1;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💧 Daily Water Intake Calculator</h1>
+  </header>
+  <main>
+    <label for="weight">Your Weight (kg):</label>
+    <input type="number" id="weight" placeholder="e.g. 60" />
+
+    <label for="activity">Activity Level:</label>
+    <select id="activity">
+      <option value="low">Low (little to no exercise)</option>
+      <option value="medium">Medium (exercise 1–3 days/week)</option>
+      <option value="high">High (exercise 4+ days/week)</option>
+    </select>
+
+    <button onclick="calculateWater()">Calculate Water Intake</button>
+
+    <div class="result" id="result">Your recommended water intake will appear here.</div>
+  </main>
+  <footer>
+    Designed by You • Stay Hydrated 💙
+  </footer>
+
+  <script>
+    function calculateWater() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const activity = document.getElementById('activity').value;
+      let multiplier = 0;
+
+      if (activity === 'low') multiplier = 30;
+      else if (activity === 'medium') multiplier = 35;
+      else if (activity === 'high') multiplier = 40;
+
+      if (!isNaN(weight) && weight > 0) {
+        const waterML = weight * multiplier;
+        const waterLiters = (waterML / 1000).toFixed(2);
+        document.getElementById('result').innerHTML = `🚰 You should drink approximately <strong>${waterLiters} liters</strong> of water per day.`;
+      } else {
+        document.getElementById('result').innerText = 'Please enter a valid weight.';
+      }
+    }
+  </script>
+</body>
+</html>
